@@ -20,11 +20,20 @@ Git is a version control system for tracking changes in computer files and coord
 
 Visual Studio Code is a source code editor developed by Microsoft for Windows, Linux and macOS. It includes support for debugging, embedded Git control, syntax highlighting, intelligent code completion, snippets, and code refactoring. It is also customizable, so users can change the editor's theme, keyboard shortcuts, and preferences. \[&nearr; [_Wikipedia_](https://en.wikipedia.org/wiki/Visual_Studio_Code) &nearr; [_Microsoft_](https://code.visualstudio.com/)]
 
-# Build an image
+# Building an image
 
-Based on the provided Dockerfile an image can easily be build by running
+Based on the provided Dockerfile an image can easily be built by running
 
 ```
 docker build -t angular-development .
 ```
-# Run the image
+# Running the created image
+
+```
+docker run -it --rm 
+               --publish <host port>:4200 
+               --env DISPLAY=<host IP>:<display number> 
+               --volume <path to apps>:/home/developer/apps trinimon/docker-angular-development:latest bash
+```
+
+\\C\git\angular\apps
