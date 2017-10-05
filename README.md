@@ -1,3 +1,5 @@
+[toc]
+
 # A Docker image for Angular development
 
 This repository contains a docker file that is used to build an image which contains some essential Angular development tools. The node based image includes a git client, Visual Studio Code and the Angular command line interface.
@@ -36,4 +38,3 @@ docker run -it --rm
                --volume <path to apps>:/home/developer/apps trinimon/docker-angular-development:latest bash
 ```
 
-\\C\git\angular\apps
