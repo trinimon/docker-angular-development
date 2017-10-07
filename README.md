@@ -4,6 +4,38 @@
 
 This repository contains a docker file that is used to build an image which contains some essential Angular development tools. The node based image includes a git client, Visual Studio Code and the Angular command line interface.
 
+# Requirements
+
+In order to use the Visual Studio Code editor a locally running X Server is required. For Linux clients this means more or less they have to run a graphical Desktop environment. Windows clients might run [Xming](https://sourceforge.net/projects/xming/), [Cygwin/X](https://x.cygwin.com/), [MobaXterm Personal Edition](https://mobaxterm.mobatek.net/) or any other X server. X forwarding has to be enabled.
+In case of a bind mount any available coding editor on the host could be used. However, on Linux systems you might have to adjust file permissions or add an appropriate user.
+
+# Building an image
+
+Based on the provided Dockerfile an image can easily be built by running
+
+```
+docker build -t angular-development .
+```
+
+# Running the created image
+
+The following command creates and runs a container which exposes the default Angular port, uses a bind mount, exports the (X Server) display, runs a bash command shell and removes the container after exit.
+
+```
+docker run -it --rm                
+               --publish <host port>:4200
+               --env DISPLAY=<host IP>:<display number>
+               --volume <path to apps>:/home/developer/apps trinimon/docker-angular-development:latest bash
+```
+
+# Using the container 
+
+* In order to create a new project run ```ng new SampleApp```. Take care, that write permissions have been granted. 
+* In case a locally running X Server display is given, ```code``` can be used to start the editor (Note: don't use ```127.0.0.1``` for the IP). 
+* Change into the created project directory. Run ```ng serve --host 0.0.0.0``` in order to run the app (Note: for access with IE or Chrome in Windows, edit the ```SampleApp/src/polyfills.ts``` file appropriately.
+* Open a browser on the host and open ```127.0.0.1:<host port>```.
+* Start developing in Visual Studio Code.
+
 # About the tools
 
 ## Angular
@@ -21,20 +53,3 @@ Git is a version control system for tracking changes in computer files and coord
 ## Visual Studio Code
 
 Visual Studio Code is a source code editor developed by Microsoft for Windows, Linux and macOS. It includes support for debugging, embedded Git control, syntax highlighting, intelligent code completion, snippets, and code refactoring. It is also customizable, so users can change the editor's theme, keyboard shortcuts, and preferences. \[&nearr; [_Wikipedia_](https://en.wikipedia.org/wiki/Visual_Studio_Code) &nearr; [_Microsoft_](https://code.visualstudio.com/)]
-
-# Building an image
-
-Based on the provided Dockerfile an image can easily be built by running
-
-```
-docker build -t angular-development .
-```
-# Running the created image
-
-```
-docker run -it --rm 
-               --publish <host port>:4200 
-               --env DISPLAY=<host IP>:<display number> 
-               --volume <path to apps>:/home/developer/apps trinimon/docker-angular-development:latest bash
-```
-
