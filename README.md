@@ -1,5 +1,3 @@
-[toc]
-
 # A Docker image for Angular development
 
 This repository contains a docker file that is used to build an image which contains some essential Angular development tools. The node based image includes a git client, Visual Studio Code and the Angular command line interface.
@@ -31,10 +29,10 @@ docker run -it --rm               
 # Using the container 
 
 * In order to create a new project run ```ng new SampleApp```. Take care, that write permissions have been granted. 
-* In case a locally running X Server display is given, ```code``` can be used to start the editor (Note: don't use ```127.0.0.1``` for the IP). 
-* Change into the created project directory. Run ```ng serve --host 0.0.0.0``` in order to run the app (Note: for access with IE or Chrome in Windows, edit the ```SampleApp/src/polyfills.ts``` file appropriately.
+* In case a locally running X Server display is given, ```code``` can be used to start the editor (note: don't use ```127.0.0.1``` for the IP). Linux users might have to enable the X Server port (check with ```ps ax | grep Xorg```) and to add the docker machine to the X access control list (see ```xhost```)
+* Change into the created project directory. Run ```ng serve --host 0.0.0.0``` in order to run the app (note: for access with IE or Chrome in Windows, edit the ```SampleApp/src/polyfills.ts``` file appropriately).
 * Open a browser on the host and open ```127.0.0.1:<host port>```.
-* Start developing in Visual Studio Code.
+* Start developing with Visual Studio Code.
 
 # About the tools
 
