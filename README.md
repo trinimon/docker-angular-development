@@ -20,11 +20,24 @@ docker build -t angular-development .
 The following command creates and runs a container which exposes the default Angular port, uses a bind mount, exports the (X Server) display, runs a bash command shell and removes the container after exit.
 
 ```
-docker run -it --rm                
-               --publish <host port>:4200
-               --env DISPLAY=<host IP>:<display number>
-               --volume <path to apps>:/home/developer/apps trinimon/docker-angular-development:latest bash
+docker run --rm -it 
+           --publish <host port>:4200
+           --env DISPLAY=<host IP>:<display number> 
+           --volume <path to apps>:/home/developer/apps 
+           --volume vscode_configuration:/home/developer/.vscode trinimon/docker-angular-development bash
 ```
+
+The Visual Studio Code configuration is hold in a named volume. Do not use a bind mount, if running containers on a Windows host. 
+
+# Docker Compose
+
+Alternatively the image can be started by using the docker compose file. Simply adjust the values for ```<host IP>```, ```<host port>``` and ```<path to apps>``` in the files ```docker-compose.yaml``` and ```display-variable.env``` and run 
+
+```
+docker-compose run --rm angular
+```
+
+This will start the angular service and remove the container after exit.  
 
 # Using the container 
 

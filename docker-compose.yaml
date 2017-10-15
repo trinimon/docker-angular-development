@@ -1,0 +1,21 @@
+version: '2'
+
+services:
+  angular:
+    image: trinimon/docker-angular-development
+    build:               
+      context: .      
+      dockerfile: Dockerfile
+    ports:
+      - '<host port>:4200'
+    env_file:
+    - display-variable.env
+    volumes:
+      - <path to apps>:/home/developer/apps
+      - vscode_configuration:/home/developer/.vscode
+    stdin_open: true
+    tty: true
+volumes:
+  vscode_configuration:
+    external:
+      name: vscode_configuration
