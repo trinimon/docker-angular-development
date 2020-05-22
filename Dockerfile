@@ -1,15 +1,15 @@
-FROM node:8.6
+FROM node:14.2
 
 MAINTAINER André Heuner <andre.heuner@trinimon.de>
 
 RUN apt-get update && \
     apt-get upgrade -y && \
-    apt-get install libgtk2.0-0 libgconf-2-4 libx11-xcb-dev libsecret-1-0 libxss1 libnss3 \ 
-                    libxkbfile1 libgl1-mesa-glx libgl1-mesa-dri libasound2 libnotify4 git -y   
+    apt-get install libxss1 libnss3 libsecret-1-0 libxkbfile1 libnotify4 libsecret-1-0 libasound2 libgtk-3-0 git -f -y && \    
+    apt --fix-broken install -y            
     
-RUN curl -O https://packages.microsoft.com/repos/vscode/pool/main/c/code/code_1.16.1-1505406497_amd64.deb && \
-    dpkg -i ./code_1.16.1-1505406497_amd64.deb && \
-    rm ./code_1.16.1-1505406497_amd64.deb     
+RUN curl -O https://packages.microsoft.com/repos/vscode/pool/main/c/code/code_1.45.1-1589445302_amd64.deb && \
+    dpkg -i ./code_1.45.1-1589445302_amd64.deb && \
+    rm ./code_1.45.1-1589445302_amd64.deb     
                 
 RUN useradd --user-group --create-home developer
 ADD extensions/* /home/developer/extensions/
